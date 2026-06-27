@@ -27,3 +27,5 @@ Follow the ai-sdlc framework starting at Step 6 (detailed execution plan):
 https://github.com/users/pateketrueke/projects/2
 
 Statuses: `Todo` → `Planning` → `In Progress` → `In Review` → `Done`
+
+Transition tickets via `gh api graphql` — update the Status single-select field on the project item for the issue.

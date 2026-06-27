@@ -1,15 +1,15 @@
-# SDLC Eval Sandbox
+# Account Provisioning & Payment UI
 
-Minimal TypeScript + Node.js project for weekend SDLC evaluation.
+TypeScript service for Stripe account provisioning and payment UI components.
 
 ## Structure
 
 ```
 src/
-├── backend/       # Track A — account provisioning
+├── backend/       # Account provisioning (Accounts v2, UA-2 traits)
 │   ├── account-config.ts
 │   └── account-config.test.ts
-├── frontend/      # Track B — appearance / Stripe Elements styling
+├── frontend/      # Appearance / Stripe Elements styling
 │   ├── appearance-config.ts
 │   └── appearance-config.test.ts
 ```
