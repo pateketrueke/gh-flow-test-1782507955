@@ -1,0 +1,35 @@
+name: Board Auto-Transition
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+jobs:
+  transition:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Transition on PR opened
+        if: github.event.action == 'opened'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE=$(gh pr view ${{ github.event.pull_request.number }} --json body -q '.body' | grep -oP '#\d+' | head -1 | tr -d '#')
+          if [ -z "$ISSUE" ]; then
+            echo "No issue reference found in PR body"
+            exit 0
+          fi
+          echo "PR references issue #$ISSUE — transitioning to In Review"
+          ./scripts/transition.sh "$ISSUE" "In Review"
+
+      - name: Transition on PR merged
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE=$(gh pr view ${{ github.event.pull_request.number }} --json body -q '.body' | grep -oP '#\d+' | head -1 | tr -d '#')
+          if [ -z "$ISSUE" ]; then
+            echo "No issue reference found in PR body"
+            exit 0
+          fi
+          echo "PR merged for issue #$ISSUE — transitioning to Done"
+          ./scripts/transition.sh "$ISSUE" "Done"
