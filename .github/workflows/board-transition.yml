@@ -11,7 +11,7 @@ jobs:
       - name: Transition on PR opened
         if: github.event.action == 'opened'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
         run: |
           ISSUE=$(gh pr view ${{ github.event.pull_request.number }} --json body -q '.body' | grep -oP '#\d+' | head -1 | tr -d '#')
           if [ -z "$ISSUE" ]; then
@@ -24,7 +24,7 @@ jobs:
       - name: Transition on PR merged
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
         run: |
           ISSUE=$(gh pr view ${{ github.event.pull_request.number }} --json body -q '.body' | grep -oP '#\d+' | head -1 | tr -d '#')
           if [ -z "$ISSUE" ]; then
