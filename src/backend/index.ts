@@ -1,1 +1,18 @@
-export { createAccountConfig, type AccountConfig } from './account-config.js';
+export {
+  InMemorySubscriberRepository,
+  createAccountConfig,
+  getMerchantCapabilities,
+  isSupportedCountry,
+  provisionConnectedAccountForSubscriber,
+  supportedCountries,
+  type AccountConfig,
+  type AccountsV2Client,
+  type AccountsV2CreateRequest,
+  type ConnectedAccount,
+  type MerchantCapability,
+  type ProvisionConnectedAccountInput,
+  type ProvisionConnectedAccountResult,
+  type SubscriberRecord,
+  type SubscriberRepository,
+  type SupportedCountry,
+} from './account-config.js';
